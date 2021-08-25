@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
+#include "shell.h"
 
 /** 
  * main: prints the PId of the child.
