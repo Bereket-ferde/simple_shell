@@ -18,13 +18,15 @@ int change_dir(char * arg);
 
 int main() {
 	
-	/* Declaring all the variables here */
+	// Declaring all the variables here
 	char line[BUFFER_LEN];
 	char * argv[100];
 	char * token;
 	char history[100][100];
 	int history_counter = 0;
 	int n = 0;
+	int m = 0;
+	char * temp;
 	const char ch = '!'; 
    	char *p;
 	char toNum;
@@ -33,27 +35,25 @@ int main() {
 
 		printf("ML>> ");
 	
-		/* Get the input */
+		// Get the input
 		if(!fgets(line, BUFFER_LEN, stdin))
 	    		break;
 
-		/* Take out all line breaks */
-		size_t length; 
-		length = strlen(line);
+		// Take out all line breaks
+		size_t length = strlen(line);
 		if (line[length - 1] == '\n') {
 		    line[length - 1] = '\0';
 		}
 		
-		/* Exit commend */
+		// Exit commend
 		if(strcmp(line, "exit")==0) {            
 			break;
 	    }
 
-		/* Seperate lines into tokens */
+		// Seperate lines into tokens
 		token = strtok(line," ");
 		
-		int i;
-		i=0;
+		int i=0;
 		while(token!=NULL){
 			argv[i]=token; 
    			p = strchr(token, ch);   
@@ -74,6 +74,9 @@ int main() {
 		argv[i]=NULL;
 		if(argv[0] == NULL)
 			continue;
+		
+		//Set Counter
+		int counter = i;
 		
 		p = strchr(argv[0], ch);
 		
@@ -127,16 +130,17 @@ int main() {
 		}
 
 	}
-return(0);
+	
 }
 
 int system_fork(char **args){
   
-  pid_t pid;
+  pid_t pid, wpid;
+  int status;
 
   pid = fork();
   if (pid == 0) {
-    /* Child process */
+    // Child process
     if (execvp(args[0], args) == -1) {
 	printf("%s: commend not found\n", args[0]);
     }
@@ -152,7 +156,7 @@ int system_fork(char **args){
 
 int change_dir(char * arg) {
 	
-	chdir(arg);
+	int r = chdir(arg);
 	return 1;
 }
 
