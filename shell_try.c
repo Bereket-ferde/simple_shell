@@ -18,7 +18,7 @@ int change_dir(char * arg);
 
 int main() {
 	
-	// Declaring all the variables here
+	/* Declaring all the variables here */
 	char line[BUFFER_LEN];
 	char * argv[100];
 	char * token;
@@ -35,22 +35,22 @@ int main() {
 
 		printf("ML>> ");
 	
-		// Get the input
+		/* Get the input */
 		if(!fgets(line, BUFFER_LEN, stdin))
 	    		break;
 
-		// Take out all line breaks
+		/* Take out all line breaks */
 		size_t length = strlen(line);
 		if (line[length - 1] == '\n') {
 		    line[length - 1] = '\0';
 		}
 		
-		// Exit commend
+		/* Exit commend */
 		if(strcmp(line, "exit")==0) {            
 			break;
 	    }
 
-		// Seperate lines into tokens
+		/* Seperate lines into tokens */
 		token = strtok(line," ");
 		
 		int i=0;
@@ -75,7 +75,7 @@ int main() {
 		if(argv[0] == NULL)
 			continue;
 		
-		//Set Counter
+		/* Set Counter */
 		int counter = i;
 		
 		p = strchr(argv[0], ch);
@@ -140,7 +140,7 @@ int system_fork(char **args){
 
   pid = fork();
   if (pid == 0) {
-    // Child process
+    /* Child process */
     if (execvp(args[0], args) == -1) {
 	printf("%s: commend not found\n", args[0]);
     }
